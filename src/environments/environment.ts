@@ -3,7 +3,23 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  api_oauth_desenv: 'http://localhost:8080/',
+  api_oauth_homolog: '',
+  api_oauth_producao: '',
+
+  web_oauth_desenv: 'http://localhost:4200/',
+  web_oauth_homolog: '',
+  web_oauth_producao: '',
+
+  client_id: 'OAUTH_CLI',
+  client_secret: 'a',
+  fl_seguranca: true,
+  chave_token_acesso: 'tokenAcesso',
+  nomes_apis: ['OAUTH_API'],
+  trechos_invalidos: ['/oauth/token'],
+  urls_aptas: ['http://localhost:8080/']
 };
 
 /*
