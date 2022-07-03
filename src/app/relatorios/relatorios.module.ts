@@ -17,11 +17,13 @@ import { NotificationsService, SimpleNotificationsModule } from 'angular2-notifi
 
 import { RelatoriosComponent } from './relatorios.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { GruposComponent } from './grupos/grupos.component';
 
 @NgModule({
   declarations: [
     RelatoriosComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    GruposComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,8 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
   entryComponents: [
   ],
   exports: [
-    UsuariosComponent
+    UsuariosComponent,
+    GruposComponent
   ]
 })
 export class RelatoriosModule { }

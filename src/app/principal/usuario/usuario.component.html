@@ -1,235 +1,245 @@
 <mat-accordion>
   <mat-expansion-panel>
-      <mat-expansion-panel-header>
-          <mat-panel-title>
-              <strong>Usuários</strong>
-          </mat-panel-title>
-      </mat-expansion-panel-header>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>Usuários</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
 
-      <div class="mt-3 mb-2">
+    <div class="mt-3 mb-2">
 
-        <form #f="ngForm" (ngSubmit)="onSubmit(f)" autocomplete="off">
-          <!--Login/E-mail-->
-          <div class="row mb-2">
-            <div class="col-6">
-                <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Login</span>
-                </div>
-                <input type="text"
-                    name="login"
-                    class="form-control"
-                    [(ngModel)]="usuario.login"
-                    required />
-                </div>
-            </div>
-
-            <div class="col-6">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" autocomplete="off">
+        <!--Login/E-mail-->
+        <div class="row mb-2">
+          <div class="col-6">
               <div class="input-group">
               <div class="input-group-prepend">
-                  <span class="input-group-text">E-mail</span>
+                  <span class="input-group-text">Login</span>
               </div>
               <input type="text"
-                  name="email"
+                  id="login"
+                  name="login"
                   class="form-control"
-                  [(ngModel)]="usuario.email"
+                  [(ngModel)]="usuario.login"
                   required />
               </div>
-            </div>
           </div>
 
-          <!-- Nome/Ativo -->
-          <div class="row mb-2">
-            <div class="col-6">
-              <div class="input-group">
-              <div class="input-group-prepend">
-                  <span class="input-group-text">Nome</span>
-              </div>
-              <input type="text"
-                  name="nome"
-                  class="form-control"
-                  [(ngModel)]="usuario.nome"
-                  required />
-              </div>
+          <div class="col-6">
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">E-mail</span>
             </div>
-
-            <div class="col-6">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <div class="form-check form-check-inline">
-                      <input type="radio"
-                        name="ativo"
-                        [(ngModel)]="usuario.flAtivo"
-                        [value]="true"
-                        class="form-check-input"
-                        required />
-                      <label class="form-check-label">Sim</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input type="radio"
-                        name="ativo"
-                        [(ngModel)]="usuario.flAtivo"
-                        [value]="false"
-                        class="form-check-input"
-                        required />
-                      <label class="form-check-label">Não</label>
-                    </div>
-                  </div>
-                </div>
-                <input type="text" class="form-control" value="Ativo" readonly />
-              </div>
-            </div>
-
-          </div>
-
-          <!--Senha/Senha Confirmada-->
-          <div *ngIf="!atualizacaoUsuario" class="row mb-2">
-            <div class="col-6">
-                <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Senha</span>
-                </div>
-                <input type="password"
-                    name="senha"
-                    class="form-control"
-                    [(ngModel)]="usuario.senha"
-                    required />
-                </div>
-            </div>
-            <div class="col-6">
-              <div class="input-group">
-              <div class="input-group-prepend">
-                  <span class="input-group-text">Confirmar Senha</span>
-              </div>
-              <input type="password"
-                  name="senhaConfirmada"
-                  class="form-control"
-                  [(ngModel)]="usuario.senhaConfirmada"
-                  required />
-              </div>
-            </div>
-          </div>
-
-          <!--Senha Atual/Nova Senha/Confirmar Nova Senha-->
-          <div *ngIf="atualizacaoUsuario" class="row mb-2">
-            <div class="col-4">
-                <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Senha Atual</span>
-                </div>
-                <input type="password"
-                    name="senhaAtual"
-                    class="form-control"
-                    [(ngModel)]="usuario.senhaAtual" />
-                </div>
-            </div>
-
-            <div class="col-4">
-              <div class="input-group">
-              <div class="input-group-prepend">
-                  <span class="input-group-text">Nova Senha</span>
-              </div>
-              <input type="password"
-                  name="novaSenha"
-                  class="form-control"
-                  [(ngModel)]="usuario.novaSenha" />
-              </div>
-            </div>
-
-            <div class="col-4">
-              <div class="input-group">
-              <div class="input-group-prepend">
-                  <span class="input-group-text">Confirmar Nova Senha</span>
-              </div>
-              <input type="password"
-                  name="novaSenhaConfirmada"
-                  class="form-control"
-                  [(ngModel)]="usuario.novaSenhaConfirmada" />
-              </div>
-            </div>
-          </div>
-
-          <div class="row mt-5 mb-5">
-              <div class="col-12">
-                  <button *ngIf="!usuario.cdUsuario && authService.temPermissao('ADICIONAR_USUARIO')"
-                      type="submit"
-                      class="btn btn-primary"
-                      [disabled]="!f.valid">
-                      <i class="fa fa-save"></i> Salvar
-                  </button>
-
-                  <button *ngIf="usuario.cdUsuario && authService.temPermissao('ATUALIZAR_USUARIO')"
-                      type="submit"
-                      class="btn btn-primary"
-                      [disabled]="!f.valid">
-                      <i class="fa fa-edit"></i> Atualizar
-                  </button>
-
-                  <button type="button"
-                            class="btn btn-primary"
-                            (click)="limpar()">
-                            <i class="fa fa-eraser"></i> Limpar</button>
-              </div>
-          </div>
-        </form>
-
-        <!-- Usuários -->
-        <div class="row">
-          <div class="col-12">
-            <div class="table-responsive">
-              <table class="table table-sm table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th>Código</th>
-                    <th>Login</th>
-                    <th>E-mail</th>
-                    <th>Nome</th>
-                    <th>Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <ng-template ngFor let-usuario [ngForOf]="usuarios">
-                    <tr>
-                      <td>{{ usuario.cdUsuario }}</td>
-                      <td>{{ usuario.login }}</td>
-                      <td>{{ usuario.email }}</td>
-                      <td>{{ usuario.nome }}</td>
-                      <td>
-                        <div class="btn-group-sm float-left">
-                          <button *ngIf="authService.temPermissao('BUSCAR_USUARIO')" type="button"
-                                  (click)="buscar(usuario.cdUsuario)"
-                                  class="btn btn-primary m-1"><i class="fa fa-search"></i> Buscar</button>
-                        </div>
-                      </td>
-                    </tr>
-
-                  </ng-template>
-
-                  <tr *ngIf="!usuarios || usuarios.length < 1">
-                    <td class="tr-text-center" colspan="4">
-                      <h5>Nenhum dado a ser exibido.</h5>
-                    </td>
-                  </tr>
-
-                </tbody>
-              </table>
-              <div class="col-4 offset-4">
-                <ngb-pagination
-                  [collectionSize]="page.totalElements"
-                  [(page)]="page.number"
-                  [pageSize]="page.size"
-                  [maxSize]="5"
-                  [rotate]="true"
-                  [boundaryLinks]="true"
-                  (pageChange)="listar($event)">
-                </ngb-pagination>
-              </div>
+            <input type="text"
+                id="email"
+                name="email"
+                class="form-control"
+                [(ngModel)]="usuario.email"
+                required />
             </div>
           </div>
         </div>
 
+        <!-- Nome/Ativo -->
+        <div class="row mb-2">
+          <div class="col-6">
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Nome</span>
+            </div>
+            <input type="text"
+                id="nome"
+                name="nome"
+                class="form-control"
+                [(ngModel)]="usuario.nome"
+                required />
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <div class="form-check form-check-inline">
+                    <input type="radio"
+                      id="ativoSim"
+                      name="ativo"
+                      [(ngModel)]="usuario.flAtivo"
+                      [value]="true"
+                      class="form-check-input"
+                      required />
+                    <label class="form-check-label">Sim</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="radio"
+                      id="ativoNao"
+                      name="ativo"
+                      [(ngModel)]="usuario.flAtivo"
+                      [value]="false"
+                      class="form-check-input"
+                      required />
+                    <label class="form-check-label">Não</label>
+                  </div>
+                </div>
+              </div>
+              <input type="text" class="form-control" value="Ativo" readonly />
+            </div>
+          </div>
+
+        </div>
+
+        <!--Senha/Senha Confirmada-->
+        <div *ngIf="!atualizacaoUsuario" class="row mb-2">
+          <div class="col-6">
+              <div class="input-group">
+              <div class="input-group-prepend">
+                  <span class="input-group-text">Senha</span>
+              </div>
+              <input type="password"
+                  id="senha"
+                  name="senha"
+                  class="form-control"
+                  [(ngModel)]="usuario.senha"
+                  required />
+              </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Confirmar Senha</span>
+            </div>
+            <input type="password"
+                id="senhaConfirmada"
+                name="senhaConfirmada"
+                class="form-control"
+                [(ngModel)]="usuario.senhaConfirmada"
+                required />
+            </div>
+          </div>
+        </div>
+
+        <!--Senha Atual/Nova Senha/Confirmar Nova Senha-->
+        <div *ngIf="atualizacaoUsuario" class="row mb-2">
+          <div class="col-4">
+              <div class="input-group">
+              <div class="input-group-prepend">
+                  <span class="input-group-text">Senha Atual</span>
+              </div>
+              <input type="password"
+                  id="senhaAtual"
+                  name="senhaAtual"
+                  class="form-control"
+                  [(ngModel)]="usuario.senhaAtual" />
+              </div>
+          </div>
+
+          <div class="col-4">
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Nova Senha</span>
+            </div>
+            <input type="password"
+                id="novaSenha"
+                name="novaSenha"
+                class="form-control"
+                [(ngModel)]="usuario.novaSenha" />
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Confirmar Nova Senha</span>
+            </div>
+            <input type="password"
+                id="novaSenhaConfirmada"
+                name="novaSenhaConfirmada"
+                class="form-control"
+                [(ngModel)]="usuario.novaSenhaConfirmada" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-5 mb-5">
+            <div class="col-12">
+                <button *ngIf="!usuario.cdUsuario && authService.temPermissao('ADICIONAR_USUARIO')"
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="!f.valid">
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+
+                <button *ngIf="usuario.cdUsuario && authService.temPermissao('ATUALIZAR_USUARIO')"
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="!f.valid">
+                    <i class="fa fa-edit"></i> Atualizar
+                </button>
+
+                <button type="button"
+                          class="btn btn-primary"
+                          (click)="limpar()">
+                          <i class="fa fa-eraser"></i> Limpar</button>
+            </div>
+        </div>
+      </form>
+
+      <!-- Usuários -->
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-sm table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Login</th>
+                  <th>E-mail</th>
+                  <th>Nome</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-template ngFor let-usuario [ngForOf]="usuarios">
+                  <tr>
+                    <td>{{ usuario.cdUsuario }}</td>
+                    <td>{{ usuario.login }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.nome }}</td>
+                    <td>
+                      <div class="btn-group-sm float-left">
+                        <button *ngIf="authService.temPermissao('BUSCAR_USUARIO')" type="button"
+                                (click)="buscar(usuario.cdUsuario)"
+                                class="btn btn-primary m-1"><i class="fa fa-search"></i> Buscar</button>
+                      </div>
+                    </td>
+                  </tr>
+
+                </ng-template>
+
+                <tr *ngIf="!usuarios || usuarios.length < 1">
+                  <td class="tr-text-center" colspan="4">
+                    <h5>Nenhum dado a ser exibido.</h5>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+            <div class="col-4 offset-4">
+              <ngb-pagination
+                [collectionSize]="page.totalElements"
+                [(page)]="page.number"
+                [pageSize]="page.size"
+                [maxSize]="5"
+                [rotate]="true"
+                [boundaryLinks]="true"
+                (pageChange)="listar($event)">
+              </ngb-pagination>
+            </div>
+          </div>
+        </div>
       </div>
+
+    </div>
 
   </mat-expansion-panel>
 </mat-accordion>

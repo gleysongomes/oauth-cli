@@ -20,11 +20,13 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { RelatoriosModule } from '../relatorios/relatorios.module';
 import { PrincipalComponent } from './principal.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { GrupoComponent } from './grupo/grupo.component';
 
 @NgModule({
   declarations: [
     PrincipalComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    GrupoComponent
   ],
   imports: [
     CommonModule,

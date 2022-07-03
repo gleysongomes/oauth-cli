@@ -20,8 +20,8 @@ export class UsuarioService {
     return this.api.post('usuarios', usuario);
   }
 
-  buscar(id: number): Observable<Usuario> {
-    return this.api.get(`usuarios/${id}`);
+  buscar(cdUsuario: number): Observable<Usuario> {
+    return this.api.get(`usuarios/${cdUsuario}`);
   }
 
   atualizar(usuario: Usuario): Observable<Usuario> {

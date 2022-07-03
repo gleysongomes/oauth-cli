@@ -2,14 +2,14 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <strong>Usuários</strong>
+        <strong>Grupos</strong>
       </mat-panel-title>
     </mat-expansion-panel-header>
 
     <div class="mt-3 mb-2">
 
       <form #f="ngForm" (ngSubmit)="gerarRelatorio()" autocomplete="off">
-        <!-- Período - Data Cadastro/Login -->
+        <!-- Período - Data Cadastro/Nome -->
         <div class="row mb-2">
           <div class="col-6">
             <div class="input-group">
@@ -23,7 +23,7 @@
                 [matDatepicker]="pickerDtCadastroInicial"
                 id="dtCadastroInicial"
                 name="dtCadastroInicial"
-                [(ngModel)]="usuario.dtCadastroInicial"
+                [(ngModel)]="grupo.dtCadastroInicial"
                 placeholder="Data Cadastro - Inicial"
                 readonly />
               <mat-datepicker #pickerDtCadastroInicial></mat-datepicker>
@@ -35,13 +35,13 @@
                 [matDatepicker]="pickerDtCadastroFinal"
                 id="dtCadastroFinal"
                 name="dtCadastroFinal"
-                [(ngModel)]="usuario.dtCadastroFinal"
+                [(ngModel)]="grupo.dtCadastroFinal"
                 placeholder="Data Cadastro - Final"
                 readonly
                 [ngStyle]="{ borderTopRightRadius: '.25rem', borderBottomRightRadius: '.25rem' }"
-                [disabled]="!usuario.dtCadastroInicial"
-                [min]="usuario.dtCadastroInicial"
-                [required]="usuario.dtCadastroInicial" />
+                [disabled]="!grupo.dtCadastroInicial"
+                [min]="grupo.dtCadastroInicial"
+                [required]="grupo.dtCadastroInicial" />
               <mat-datepicker #pickerDtCadastroFinal></mat-datepicker>
 
             </div>
@@ -50,50 +50,35 @@
           <div class="col-6">
             <div class="input-group">
             <div class="input-group-prepend">
-                <span class="input-group-text">Login</span>
-            </div>
-            <input type="text"
-              id="login"
-              name="login"
-              class="form-control"
-              [(ngModel)]="usuario.login" />
-            </div>
-          </div>
-
-        </div>
-
-        <!-- E-mail/Nome -->
-        <div class="row mb-2">
-          <div class="col-6">
-            <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text">E-mail</span>
-            </div>
-            <input type="text"
-                id="email"
-                name="email"
-                class="form-control"
-                [(ngModel)]="usuario.email" />
-            </div>
-          </div>
-
-          <div class="col-6">
-            <div class="input-group">
-            <div class="input-group-prepend">
                 <span class="input-group-text">Nome</span>
             </div>
-            <input type="text"
+            <input
+                type="text"
                 id="nome"
                 name="nome"
                 class="form-control"
-                [(ngModel)]="usuario.nome" />
+                [(ngModel)]="grupo.nome" />
             </div>
           </div>
 
         </div>
 
-        <!-- Ativo/Tipo de Arquivo -->
+        <!-- Descrição/Ativo -->
         <div class="row mb-2">
+          <div class="col-6">
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Descrição</span>
+            </div>
+            <input
+                type="text"
+                id="descricao"
+                name="descricao"
+                class="form-control"
+                [(ngModel)]="grupo.descricao" />
+            </div>
+          </div>
+
           <div class="col-6">
             <div class="input-group">
               <div class="input-group-prepend">
@@ -102,7 +87,7 @@
                     <input type="radio"
                       id="ativoSim"
                       name="ativo"
-                      [(ngModel)]="usuario.flAtivo"
+                      [(ngModel)]="grupo.flAtivo"
                       [value]="true"
                       class="form-check-input" />
                     <label class="form-check-label">Sim</label>
@@ -111,7 +96,7 @@
                     <input type="radio"
                       id="ativoNao"
                       name="ativo"
-                      [(ngModel)]="usuario.flAtivo"
+                      [(ngModel)]="grupo.flAtivo"
                       [value]="false"
                       class="form-check-input" />
                     <label class="form-check-label">Não</label>
@@ -122,6 +107,10 @@
             </div>
           </div>
 
+        </div>
+
+        <!-- Tipo de Arquivo -->
+        <div class="row mb-2">
           <div class="col-6">
             <div class="input-group">
               <div class="input-group-prepend">
@@ -129,8 +118,8 @@
                   <div class="form-check form-check-inline">
                     <input type="radio"
                       id="tipoArquivoPDF"
-                      name="tipoAplicacao"
-                      [(ngModel)]="usuario.tipoArquivo"
+                      name="tipoArquivo"
+                      [(ngModel)]="grupo.tipoArquivo"
                       value="pdf"
                       class="form-check-input"
                       required />
@@ -139,8 +128,8 @@
                   <div class="form-check form-check-inline">
                     <input type="radio"
                       id="tipoArquivoCSV"
-                      name="tipoAplicacao"
-                      [(ngModel)]="usuario.tipoArquivo"
+                      name="tipoArquivo"
+                      [(ngModel)]="grupo.tipoArquivo"
                       value="csv"
                       class="form-check-input"
                       required />
@@ -149,8 +138,8 @@
                   <div class="form-check form-check-inline">
                     <input type="radio"
                       id="tipoArquivoXLS"
-                      name="tipoAplicacao"
-                      [(ngModel)]="usuario.tipoArquivo"
+                      name="tipoArquivo"
+                      [(ngModel)]="grupo.tipoArquivo"
                       value="xls"
                       class="form-check-input"
                       required />
@@ -160,7 +149,7 @@
                     <input type="radio"
                       id="tipoArquivoXLSX"
                       name="tipoArquivo"
-                      [(ngModel)]="usuario.tipoArquivo"
+                      [(ngModel)]="grupo.tipoArquivo"
                       value="xlsx"
                       class="form-check-input"
                       required />
