@@ -1,0 +1,188 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>Permissões</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="mt-3 mb-2">
+
+      <form #f="ngForm" (ngSubmit)="gerarRelatorio()" autocomplete="off">
+        <!-- Período - Data Cadastro/Nome -->
+        <div class="row mb-2">
+          <div class="col-6">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Período - Data Cadastro</span>
+              </div>
+              <input type="text"
+                class="form-control"
+                (click)='pickerDtCadastroInicial.open()'
+                color='primary'
+                [matDatepicker]="pickerDtCadastroInicial"
+                id="dtCadastroInicial"
+                name="dtCadastroInicial"
+                [(ngModel)]="permissao.dtCadastroInicial"
+                placeholder="Data Cadastro - Inicial"
+                readonly />
+              <mat-datepicker #pickerDtCadastroInicial></mat-datepicker>
+
+              <input type="text"
+                class="form-control"
+                (click)="pickerDtCadastroFinal.open()"
+                color="primary"
+                [matDatepicker]="pickerDtCadastroFinal"
+                id="dtCadastroFinal"
+                name="dtCadastroFinal"
+                [(ngModel)]="permissao.dtCadastroFinal"
+                placeholder="Data Cadastro - Final"
+                readonly
+                [ngStyle]="{ borderTopRightRadius: '.25rem', borderBottomRightRadius: '.25rem' }"
+                [disabled]="!permissao.dtCadastroInicial"
+                [min]="permissao.dtCadastroInicial"
+                [required]="permissao.dtCadastroInicial" />
+              <mat-datepicker #pickerDtCadastroFinal></mat-datepicker>
+
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Nome</span>
+            </div>
+            <input type="text"
+                id="nome"
+                name="nome"
+                class="form-control"
+                [(ngModel)]="permissao.nome" />
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Descrição/Ativa -->
+        <div class="row mb-2">
+          <div class="col-6">
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Descrição</span>
+            </div>
+            <input type="text"
+                id="descricao"
+                name="descricao"
+                class="form-control"
+                [(ngModel)]="permissao.descricao" />
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <div class="form-check form-check-inline">
+                    <input type="radio"
+                      id="ativaSim"
+                      name="ativa"
+                      [(ngModel)]="permissao.flAtiva"
+                      [value]="true"
+                      class="form-check-input" />
+                    <label class="form-check-label">Sim</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="radio"
+                      id="ativaNao"
+                      name="ativa"
+                      [(ngModel)]="permissao.flAtiva"
+                      [value]="false"
+                      class="form-check-input" />
+                    <label class="form-check-label">Não</label>
+                  </div>
+                </div>
+              </div>
+              <input type="text"
+                class="form-control"
+                value="Ativa"
+                readonly />
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tipo de Arquivo -->
+        <div class="row mb-2">
+          <div class="col-6">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <div class="form-check form-check-inline">
+                    <input type="radio"
+                      id="tipoArquivoPDF"
+                      name="tipoArquivo"
+                      [(ngModel)]="permissao.tipoArquivo"
+                      value="pdf"
+                      class="form-check-input"
+                      required />
+                    <label class="form-check-label">PDF</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="radio"
+                      id="tipoArquivoCSV"
+                      name="tipoArquivo"
+                      [(ngModel)]="permissao.tipoArquivo"
+                      value="csv"
+                      class="form-check-input"
+                      required />
+                    <label class="form-check-label">CSV</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="radio"
+                      id="tipoArquivoXLS"
+                      name="tipoArquivo"
+                      [(ngModel)]="permissao.tipoArquivo"
+                      value="xls"
+                      class="form-check-input"
+                      required />
+                    <label class="form-check-label">XLS</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="radio"
+                      id="tipoArquivoXLSX"
+                      name="tipoArquivo"
+                      [(ngModel)]="permissao.tipoArquivo"
+                      value="xlsx"
+                      class="form-check-input"
+                      required />
+                    <label class="form-check-label">XLSX</label>
+                  </div>
+                </div>
+              </div>
+              <input type="text"
+                class="form-control"
+                value="Tipo de Arquivo"
+                readonly />
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row mt-5 mb-5">
+          <div class="col-12">
+
+            <button type="submit"
+              class="btn btn-primary"
+              [disabled]="!f.valid"><i class="fa fa-file"></i> Gerar Relatório</button>
+
+            <button type="button"
+              class="btn btn-primary"
+              (click)="limpar()"><i class="fa fa-eraser"></i> Limpar</button>
+
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>

@@ -13,6 +13,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 
 import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { PrincipalModule } from './principal/principal.module';
@@ -22,13 +23,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ModalPesquisarAplicacaoComponent } from './modal/modal-pesquisar-aplicacao/modal-pesquisar-aplicacao.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ModalPesquisarAplicacaoComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { FooterComponent } from './footer/footer.component';
     MatButtonModule,
 
     SimpleNotificationsModule.forRoot(),
+    NgbPaginationModule,
 
     AppRoutingModule,
     PrincipalModule,

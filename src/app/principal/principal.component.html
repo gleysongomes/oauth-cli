@@ -1,4 +1,5 @@
 <div class="mb-2 mt-2">
   <app-usuario *ngIf="authService.temPermissao('LISTAR_USUARIO')"></app-usuario>
   <app-grupo *ngIf="authService.temPermissao('LISTAR_GRUPO')"></app-grupo>
+  <app-permissao *ngIf="authService.temPermissao('LISTAR_PERMISSAO')"></app-permissao>
 </div>

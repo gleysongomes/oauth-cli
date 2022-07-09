@@ -21,12 +21,14 @@ import { RelatoriosModule } from '../relatorios/relatorios.module';
 import { PrincipalComponent } from './principal.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { GrupoComponent } from './grupo/grupo.component';
+import { PermissaoComponent } from './permissao/permissao.component';
 
 @NgModule({
   declarations: [
     PrincipalComponent,
     UsuarioComponent,
-    GrupoComponent
+    GrupoComponent,
+    PermissaoComponent
   ],
   imports: [
     CommonModule,
